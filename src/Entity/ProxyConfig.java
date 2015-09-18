@@ -6,6 +6,11 @@ public class ProxyConfig {
 	private  String  PortXpath;
 	private  String  AnonymityXpath;
 	private  String  ProtocolXpath;
+	
+	private  boolean  PageEnable;
+	private  int           PageStart;
+	private  int           PageEnd;
+	
 	public String getSite() {
 		return Site;
 	}
@@ -35,5 +40,23 @@ public class ProxyConfig {
 	}
 	public void setProtocolXpath(String protocolXpath) {
 		ProtocolXpath = protocolXpath;
+	}
+	public boolean isPageEnable() {
+		return PageEnable;
+	}
+	public void setPageEnable(boolean pageEnable) {
+		PageEnable = pageEnable;
+	}
+	public int getPageStart() {
+		return PageStart;
+	}
+	public void setPageStart(int pageStart) {
+		PageStart = pageStart;
+	}
+	public int getPageEnd() {
+		return PageEnd;
+	}
+	public void setPageEnd(int pageEnd) {
+		PageEnd = pageEnd;
 	}
 }

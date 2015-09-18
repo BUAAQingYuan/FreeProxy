@@ -1,5 +1,7 @@
 package Proxy;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.configuration.ConfigurationException;
@@ -10,21 +12,60 @@ import Entity.ProxyType;
 
 public class ProxyFactory {
 	
-	//Ä¬ÈÏ»ñÈ¡Ò»¸ö¹úÄÚ
-	public static  ProxyHost   getProxyHost()
+	private  static  List<ProxyHost> hosts=new ArrayList<ProxyHost>();
+	
+	   /*
+	 
+	  æ„é€ å™¨
+	  
+	  */
+	
+	public  ProxyFactory(String configfile) throws ConfigurationException
 	{
-		
-		return null;
+		ProxyCrawler crawler=new ProxyCrawler(configfile);
+		crawler.run();
+		hosts=crawler.getHosts();
+		System.out.println("The number of ProxyIP  is "+hosts.size());
 	}
 	
-	//¹úÍâ
+	public  ProxyFactory(List<String>  configs) throws ConfigurationException
+	{
+		ProxyCrawler crawler=new ProxyCrawler(configs);
+		crawler.run();
+		hosts=crawler.getHosts();
+		System.out.println("The number of ProxyIP  is "+hosts.size());
+	}
+	
+	public  ProxyFactory(File configdir) throws ConfigurationException
+	{
+		ProxyCrawler crawler=new ProxyCrawler(configdir);
+		crawler.run();
+		hosts=crawler.getHosts();
+		System.out.println("The number of ProxyIP  is "+hosts.size());
+	}
+	
+	
+	  /*
+	       
+	       function interface
+	 
+	 */
+	
+	//é»˜è®¤è·å–ä¸€ä¸ªå›½å†…
+	public static  ProxyHost   getProxyHost()
+	{
+		System.out.println("Size is "+hosts.size());
+		return hosts.get(0);
+	}
+	
+	//å›½å¤–
 	public  static ProxyHost  getProxyHost(boolean  pos)
 	{
 		return null;
 	}
 	
 	
-	//Ä¬ÈÏ»ñÈ¡10¸ö,¹úÄÚ
+	//é»˜è®¤è·å–10ä¸ªï¼Œå›½å†…
 	public  static   List<ProxyHost>  getProxyHosts() throws ConfigurationException
 	{
 		ProxyCrawler  crawler=new ProxyCrawler("ProxySite.xml");
@@ -35,16 +76,30 @@ public class ProxyFactory {
 			return crawler.hosts;
 	}
 	
-	//Ö¸¶¨ÊıÁ¿
+	//æŒ‡å®šæ•°é‡
 	public  static   List<ProxyHost>  getProxyHosts(int number)
 	{
 		return null;
 	}
 	
-	//Ö¸¶¨²ÎÊı
+	//æŒ‡å®šå‚æ•°
 	public  static  List<ProxyHost>  getProxyHosts(int number,ProxyType type,boolean position)
 	{
 		return null;
+	}
+	
+	public static void main(String[] args) throws ConfigurationException 
+	{
+		List<String>  confs=new ArrayList<String>();
+		confs.add("ProxySite2.xml");
+		confs.add("ProxySite.xml");
+		confs.add("Proxydaili.xml");
+		ProxyFactory  factory=new ProxyFactory(confs);
+		ProxyHost  host=factory.getProxyHost();
+		System.out.println("IP : "+host.getIp());
+		System.out.println("Port: "+host.getPort());
+		System.out.println("Anonymity: "+host.getType());
+		System.out.println("Procotol: "+host.getProtocol());
 	}
 	
 	

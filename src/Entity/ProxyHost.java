@@ -3,7 +3,7 @@ package Entity;
 public class ProxyHost {
 	private String  ip;
 	private int       port;
-	//¹úÄÚ»¹ÊÇ¹úÍâ
+	//å›½å†…æˆ–å›½å¤–
 	private boolean  position;
 	private int type;
 	private int  protocol;

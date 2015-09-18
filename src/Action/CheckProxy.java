@@ -12,14 +12,14 @@ import Entity.ProxyType;
 import us.codecraft.webmagic.selector.Html;
 
 /*
-   ²âÊÔÒ»¸ö´úÀíIP£¬»ñµÃÆäÏà¹ØĞÅÏ¢
+  æµ‹è¯•ä¸€ä¸ªä»£ç†IPï¼Œè·å¾—å…¶ç›¸å…³ä¿¡æ¯
  */
 
 public class CheckProxy {
 	
 	
-	 //²âÊÔÒ»¸ö´úÀíIPµÄÄäÃû³Ì¶È
-	//ÊäÈë¹ıÂË(´ıÌí¼Ó)
+	 //æµ‹è¯•ä¸€ä¸ªä»£ç†IPçš„åŒ¿åç¨‹åº¦
+	//è¾“å…¥è¿‡æ»¤(å¾…æ·»åŠ )
 	 public  int   CheckAnonymity(String ip,int port) throws HttpException, IOException
 	 {
 		 String checksite="http://www.stilllistener.com/checkpoint1/test11/";
@@ -66,8 +66,8 @@ public class CheckProxy {
 	 }
 	 
 	 
-	 //²âÊÔÒ»¸ö´úÀíIPµÄÑÓÊ±£¬www.baidu.com
-	 //ÉèÖÃÈ¡Ïû³¬Ê±Ê±¼ä£¬»òÉèÖÃ³¤Ò»µã(´ı´¦Àí)
+	 //æµ‹è¯•ä¸€ä¸ªä»£ç†IPçš„å»¶æ—¶ï¼Œwww.baidu.com
+	 //è®¾ç½®å–æ¶ˆè¶…æ—¶æ—¶é—´ï¼Œæˆ–è®¾ç½®é•¿ä¸€ç‚¹(å¾…å¤„ç†)
 	 public  long   CheckDelay(String ip,int port) throws IOException
 	 {
 		 long  delay=0;
@@ -81,19 +81,19 @@ public class CheckProxy {
 	     if(statusCode==200)
 	     {
 	    	 delay=endTime-startTime;
-	    	 System.out.println("delay time is "+delay+"ºÁÃë.");
+	    	 System.out.println("delay time is "+delay+"æ¯«ç§’.");
 	    	 return delay;
 	     }
 	     else{
-	    	 System.out.println("´úÀíIPËÆºõ²»¿ÉÓÃ.");
+	    	 System.out.println("ä»£ç†IPä¼¼ä¹ä¸å¯ç”¨.");
 	    	 return 0;
 	     }
 	     
 	 }
 	 
 	 
-	 //²âÊÔÒ»¸ö´úÀíÄÜ·ñÊ¹ÓÃ¡£
-	 //»¹ÒªÉèÖÃ³¬Ê±Ê±¼ä(´ı²¹³ä)
+	 //æµ‹è¯•ä¸€ä¸ªä»£ç†èƒ½å¦ä½¿ç”¨
+	 //è¿˜è¦è®¾ç½®è¶…æ—¶æ—¶é—´(å¾…è¡¥å……)
 	 public  boolean  CheckIsOk(String ip,int port) throws IOException
 	 {
 	        String remote="http://www.baidu.com/";
@@ -105,22 +105,22 @@ public class CheckProxy {
 	        	System.out.println("---------"+statusCode+"------------");
 	        	if(statusCode==200)
 	        	{
-	        		System.out.println("´úÀíIP£º"+ip+":"+port+" ¿ÉÒÔÊ¹ÓÃ£¡");
+	        		System.out.println("ä»£ç†IPï¼š "+ip+":"+port+" å¯ä»¥ä½¿ç”¨!");
 	        		return true;
 	        	}
 	        	else
 	        	{
-	        		System.out.println("´úÀíIP£º"+ip+":"+port+" ²»ÄÜÊ¹ÓÃ£¡");
+	        		System.out.println("ä»£ç†IP: "+ip+":"+port+" ä¸èƒ½ä½¿ç”¨!");
 	        		return false;
 	        	}
 	        }catch(Exception e)
 	        {
-	        	System.out.println("´úÀíIP£º"+ip+":"+port+" ²»ÄÜÊ¹ÓÃ£¡");
+	        	System.out.println("ä»£ç†IP: "+ip+":"+port+" ä¸èƒ½ä½¿ç”¨!");
 	        	return false;
 	        }
 	 }
 	 
-	//²âÊÔÒ»¸ö´úÀíIPµÄ¹éÊôµØ
+	//æµ‹è¯•ä¸€ä¸ªä»£ç†IPçš„å½’å±åœ°
 	 public  String   getProxyAddress(String ip)
 	 {
 		 return null;
@@ -129,7 +129,7 @@ public class CheckProxy {
 	 
 	 public static void main(String[] args) throws IOException{
 			CheckProxy check=new CheckProxy();
-			String ip="117.136.234.9";
+			String ip="117.136.234.12";
 			int  port=80;
 			check.CheckIsOk(ip,port);
 		    //check.CheckDelay(ip, port);
