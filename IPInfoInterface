@@ -1,0 +1,11 @@
+查询IP的地址接口
+//淘宝，可以查询境外的IP
+http://ip.taobao.com/service/getIpInfo.php?ip=
+//新浪
+http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=
+//ip138
+http://wap.ip138.com/ip.asp?ip=
+//腾讯
+http://ip.qq.com/cgi-bin/searchip?searchip1=
+//百度,好像没法查询境外的IP
+http://api.map.baidu.com/location/ip?ak=F454f8a5efe5e577997931cc01de3974&ip=

@@ -1,11 +1,14 @@
 package Proxy;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.httpclient.HttpException;
 
+import Action.CheckProxy;
 import Crawler.ProxyCrawler;
 import Entity.ProxyHost;
 import Entity.ProxyType;
@@ -52,11 +55,21 @@ public class ProxyFactory {
 	 */
 	
 	//默认获取一个国内
-	public static  ProxyHost   getProxyHost()
-	{
-		System.out.println("Size is "+hosts.size());
-		return hosts.get(0);
+	public static  ProxyHost   getProxyHost() throws HttpException, IOException 
+	{	
+		for(int i=0;i<hosts.size();i++)
+		{
+			ProxyHost  current=hosts.get(i);
+			if(!CheckProxy.isProxyForeign(current.getIp())&&CheckProxy.CheckIsOk(current.getIp(),current.getPort()))
+			{
+				return  current;
+			}
+		}
+		
+		return null;
 	}
+	
+	
 	
 	//国外
 	public  static ProxyHost  getProxyHost(boolean  pos)
@@ -66,40 +79,77 @@ public class ProxyFactory {
 	
 	
 	//默认获取10个，国内
-	public  static   List<ProxyHost>  getProxyHosts() throws ConfigurationException
+	public  static   List<ProxyHost>  getProxyHosts() throws HttpException, IOException 
 	{
-		ProxyCrawler  crawler=new ProxyCrawler("ProxySite.xml");
-		crawler.run();
-		if(crawler.hosts.size()>10)
-			return crawler.hosts.subList(0, 9);
-		else
-			return crawler.hosts;
+		int  num=0;
+		List<ProxyHost>   host=new ArrayList<ProxyHost>();
+		for(int i=0;i<hosts.size();i++)
+		{
+			ProxyHost  current=hosts.get(i);
+			if(!CheckProxy.isProxyForeign(current.getIp())&&CheckProxy.CheckIsOk(current.getIp(),current.getPort()))
+			{
+				host.add(current);
+				num++;
+				if(num==10)
+					break;
+			}
+		}
+		return  host;
 	}
+	
 	
 	//指定数量
-	public  static   List<ProxyHost>  getProxyHosts(int number)
+	public  static   List<ProxyHost>  getProxyHosts(int number) throws HttpException, IOException
 	{
-		return null;
+		int  num=0;
+		List<ProxyHost>   host=new ArrayList<ProxyHost>();
+		for(int i=0;i<hosts.size();i++)
+		{
+			ProxyHost  current=hosts.get(i);
+			if(CheckProxy.CheckIsOk(current.getIp(),current.getPort()))
+			{
+				host.add(current);
+				num++;
+				if(num==number)
+					break;
+			}
+		}
+		return  host;
 	}
 	
-	//指定参数
-	public  static  List<ProxyHost>  getProxyHosts(int number,ProxyType type,boolean position)
+	//指定数量、匿名程度
+	//输入过滤(待添加)
+	public  static  List<ProxyHost>  getProxyHosts(int number,int type) throws IOException
 	{
-		return null;
+		int  num=0;
+		List<ProxyHost>   host=new ArrayList<ProxyHost>();
+		for(int i=0;i<hosts.size();i++)
+		{
+			ProxyHost  current=hosts.get(i);
+			if(CheckProxy.CheckIsOk(current.getIp(),current.getPort())&&CheckProxy.CheckAnonymity(current.getIp(),current.getPort())==type)
+			{
+				host.add(current);
+				num++;
+				if(num==number)
+					break;
+			}
+		}
+		return  host;
 	}
 	
-	public static void main(String[] args) throws ConfigurationException 
+	
+	public static void main(String[] args) throws ConfigurationException, HttpException, IOException 
 	{
-		List<String>  confs=new ArrayList<String>();
-		confs.add("ProxySite2.xml");
-		confs.add("ProxySite.xml");
-		confs.add("Proxydaili.xml");
-		ProxyFactory  factory=new ProxyFactory(confs);
-		ProxyHost  host=factory.getProxyHost();
-		System.out.println("IP : "+host.getIp());
-		System.out.println("Port: "+host.getPort());
-		System.out.println("Anonymity: "+host.getType());
-		System.out.println("Procotol: "+host.getProtocol());
+        File  confdir=new File("E:\\MyEclipse 2015 CI\\FreeProxy\\src\\Configs");
+		ProxyFactory  factory=new ProxyFactory(confdir);
+		
+		List<ProxyHost> host=new ArrayList<ProxyHost>();
+		host=ProxyFactory.getProxyHosts(8,ProxyType.HighAnonymous);
+		for(ProxyHost  one:host)
+		{
+			System.out.println(one.getIp());
+		}
+		
 	}
 	
 	

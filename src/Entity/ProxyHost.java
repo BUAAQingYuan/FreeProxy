@@ -4,9 +4,10 @@ public class ProxyHost {
 	private String  ip;
 	private int       port;
 	//国内或国外
-	private boolean  position;
+	private boolean  foreign;
 	private int type;
 	private int  protocol;
+	private String  position;
 	
 	//constructor
 	public  ProxyHost()
@@ -24,9 +25,9 @@ public class ProxyHost {
 	{
 		this.ip=ip;
 		this.port=port;
-		this.position=pos;
-		this.setType(type);
-		this.setProtocol(protocol);
+		this.foreign=pos;
+		this.type=type;
+		this.protocol=protocol;
 	}
 	
 	public String getIp() {
@@ -42,13 +43,7 @@ public class ProxyHost {
 		this.port = port;
 	}
 	
-	public boolean isPosition() {
-		return position;
-	}
-	public void setPosition(boolean position) {
-		this.position = position;
-	}
-
+	
 	public int getType() {
 		return type;
 	}
@@ -63,5 +58,21 @@ public class ProxyHost {
 
 	public void setProtocol(int protocol) {
 		this.protocol = protocol;
+	}
+
+	public boolean isForeign() {
+		return foreign;
+	}
+
+	public void setForeign(boolean foreign) {
+		this.foreign = foreign;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
 	}
 }

@@ -11,7 +11,7 @@ import Entity.ProxyConfig;
 public class FileProcess {
 	
 	private static  List<String> type1=Arrays.asList("透明");
-	private static  List<String> type2=Arrays.asList("匿名");
+	private static  List<String> type2=Arrays.asList("匿名","普匿");
 	private static  List<String> type3=Arrays.asList("高匿名","高匿");
 	
 	//read config-file ,and return  thhe ProxyConfig 
