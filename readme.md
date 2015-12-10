@@ -27,7 +27,7 @@ FreeProxy是一个给开发者提供免费、高效的代理IP以及相关服务
 ...
 
 @c
-@A和@B只是FreeProxy提供的基本功能，@3就是在@1和@2的基础上提供更高质量的服务。这些函数暂时定义在Proxy.ProxyOptimize类中。包括但不限于:
+@a和@b只是FreeProxy提供的基本功能，@c就是在@a和@b的基础上提供更高质量的服务。这些函数暂时定义在Proxy.ProxyOptimize类中。包括但不限于:
 
 *找出访问用户指定的targeturl速度最快的代理IP
 ...
