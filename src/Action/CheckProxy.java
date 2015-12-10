@@ -99,6 +99,35 @@ public class CheckProxy {
 	     
 	 }
 	 
+	 //指定targeturl ,测试代理的延时
+	 public  static long   CheckDelayUsetarget(String ip,int port,String targeturl) throws IOException
+	 {
+		 long  delay=0;
+		 String remote=targeturl;
+		 HttpClient client=new HttpClient();
+		 client.getHostConfiguration().setProxy(ip,port);
+		 
+		  //设置超时
+	     client.getHttpConnectionManager().getParams().setConnectionTimeout(FactoryParameter.connectiontimeout);
+	     client.getHttpConnectionManager().getParams().setSoTimeout(FactoryParameter.sotimeout);
+	     
+	     HttpMethod method =new GetMethod(remote);
+	     long startTime = System.currentTimeMillis();
+	     int statusCode = client.executeMethod(method);
+	     long endTime = System.currentTimeMillis();
+	     if(statusCode==200)
+	     {
+	    	 delay=endTime-startTime;
+	    	 System.out.println("delay time is "+delay+"毫秒.");
+	    	 return delay;
+	     }
+	     else{
+	    	 System.out.println("代理IP似乎不可用.");
+	    	 return 0;
+	     }
+	     
+	 }
+	 
 	 
 	 //测试一个代理能否使用
 	 //还要设置超时时间(待补充)
@@ -170,10 +199,10 @@ public class CheckProxy {
 	 
 	 public static void main(String[] args) throws IOException{
 			CheckProxy check=new CheckProxy();
-			String ip="218.189.26.20";
-			int  port=8080;
+			String ip="117.136.234.5";
+			int  port=80;
 			check.CheckIsOk(ip,port);
-		    check.CheckDelay(ip, port);
+		    //check.CheckDelay(ip, port);
 		   // PrintProxy.printProxyType(check.CheckAnonymity(ip, port));
 			//System.out.println(check.getProxyAddress(ip));
 			//System.out.println("IP locations in foreign country :"+check.isProxyForeign(ip));

@@ -6,8 +6,10 @@ import java.util.List;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.XMLConfiguration;
+import org.apache.http.HttpHost;
 
 import Util.FileProcess;
+import Entity.FactoryParameter;
 import Entity.ProxyConfig;
 import Entity.ProxyHost;
 import us.codecraft.webmagic.Page;
@@ -136,7 +138,7 @@ public class ProxyCrawler  implements  PageProcessor,Runnable {
 		*/
 		currentpage=configlist.get(counter).getPageStart();
 		
-		Spider.create(this).startUrls(url).run(); 
+		Spider.create(this).startUrls(url).thread(FactoryParameter.crawlerthreadnum).run(); 
 	}
 
 	@Override
@@ -161,7 +163,7 @@ public class ProxyCrawler  implements  PageProcessor,Runnable {
 		{
 			ProxyHost  host=new ProxyHost(ip.get(i),Integer.valueOf(port.get(i)),true,FileProcess.getAnonymityType(type.get(i)),FileProcess.getProtocolType(protocol.get(i)));
 			hosts.add(host);
-			//System.out.println(ip.get(i)+" "+port.get(i)+" "+type.get(i)+" "+protocol.get(i));
+			System.out.println(ip.get(i)+" "+port.get(i)+" "+type.get(i)+" "+protocol.get(i));
 		}
 		
 		//next page
@@ -188,9 +190,9 @@ public class ProxyCrawler  implements  PageProcessor,Runnable {
 	public static void main(String[] args) throws ConfigurationException{
 		//设置多个文件
 		List<String>  confs=new ArrayList<String>();
-		confs.add("ProxySite2.xml");
-		confs.add("ProxySite.xml");
-		confs.add("Proxydaili.xml");
+		confs.add("Configs\\Proxy1.xml");
+		confs.add("Configs\\Proxy2.xml");
+		confs.add("Configs\\Proxy3.xml");
 		new ProxyCrawler(confs).run();
 		
 		

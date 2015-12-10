@@ -33,5 +33,15 @@
 	<classpathentry kind="lib" path="lib/commons-lang-2.6.jar"/>
 	<classpathentry kind="lib" path="lib/commons-beanutils-1.8.0.jar"/>
 	<classpathentry kind="lib" path="lib/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="lib/spring-aop-4.2.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-beans-4.2.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-core-4.2.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/aspectjweaver-1.8.7.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/jopt-simple-4.9.jar"/>
+	<classpathentry kind="lib" path="lib/spring-context-4.2.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-expression-4.2.3.RELEASE.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -18,7 +18,6 @@ public class HttpProcess {
 	public   static  String   getJson(String url) throws HttpException, IOException
 	{
 		 HttpClient client=new HttpClient();
-		 
 		  //设置超时
 	     client.getHttpConnectionManager().getParams().setConnectionTimeout(FactoryParameter.connectiontimeout);
 	     client.getHttpConnectionManager().getParams().setSoTimeout(FactoryParameter.sotimeout);
@@ -31,8 +30,8 @@ public class HttpProcess {
 	
 	public static void main(String[] args) throws HttpException, IOException
 	{
-		String url="http://ip.taobao.com/service/getIpInfo.php?ip=49.93.222.18";
-		HttpProcess.getJson(url);
+		String url="http://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/1234/JSON/";
+		System.out.println(HttpProcess.getJson(url));
 	}
 	
 }
