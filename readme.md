@@ -1,7 +1,9 @@
+##FreeProxy
+
 FreeProxy是一个给开发者提供免费、高效的代理IP以及相关服务的框架或工具。
 
 
-                                                ********目标与功能********
+###目标与功能
 
 @1
 第一个基本的功能就是提供给使用者全面、可靠获取代理IP的接口。这些函数定义在Proxy.ProxyFactory类中。包括但不限于：
@@ -38,44 +40,8 @@ FreeProxy是一个给开发者提供免费、高效的代理IP以及相关服务
 ...
 
 
-
-
-                                            ********项目组织********
-@#
-对项目的组织进行一下说明。
-
-Action:代理IP的条件测试
-
-Crawler：爬虫，使用WebMagic爬虫框架。爬虫的数据源定义在xml文件中，通常是一个代理IP网站，<ProxySite>标明页面，<IP>、<Port>、<Anonymity>、
-        <Protocol>等标签标明代理IP、端口、匿名度、支持的协议。根据需要还可能会添加描述延时、归属地等的标签。描述的属性用xpath语法标明待
-        抓取属性的位置。总之，数据源必须是可配置的，用户可以定义不同的数据源。
-        
-        我的想法是最好不使用数据库，因为FreeProxy是一个轻量的框架，如果数据量有些大，可以使用一些内存数据库，比如Redis。
-        
-AnalogTest: 目前没有什么用，可以把一些不太成熟的方法写在这里面。
-
-Proxy: 提供代理服务。最重要的地方。
-
-
-                                         ********实现思路********
-
-1.爬虫与接口的工作方式
-
-    大体思路是:
-    
-    使用接口时，用户首先需要构造ProxyFactory，然后调用里面静态方法。
-  
-    用户构造ProxyFactory，目前构造方法有三种，传入一个配置文件、传入多个配置文件、传入配置文件目录。在构造函数中，调用ProxyCrawler抓取
-    
-指定的数据源的代理IP信息，每个代理IP的信息都封装成ProxyHost，所有的ProxyHost都存在ProxyFactory.hosts中，这是一个静态变量，之后所有的接
-
-口都应用ProxyFactory.hosts中的数据，实现接口自身定义的功能。爬虫只会在构造ProxyFactory时执行一次。
-
-
-2.爬虫的具体工作
-
-根据配置文件定义的数据源，爬虫抓取代理IP信息，将这些信息封装成ProxyHost返回。
-
+###使用                        
+                               
 每个配置文件描述一个数据源，
 
 <ProxySite> 数据所在页面，如果url中包含页数，页号用#代替。一般情况下，不同页的url只有页号不同。
@@ -90,14 +56,27 @@ Proxy: 提供代理服务。最重要的地方。
 每个配置文件描述一个数据源，爬虫可以同时读入多个数据源并爬取数据。
 
 
+给一个类的某一个方法绑定一个代理IP，不影响其他函数
+```
+HttpHost   proxyHost=new HttpHost("180.76.135.145",80);
+Test target = new Test(); 
+ProxyIPApply  apply=new ProxyIPApply().setClassname(Test.class).setMethodname("Dosomething").setHost(proxyHost);
+Test proxy=(Test) apply.Config(target);
+proxy.Dosomething();
 
+```
 
-                                       ********项目进度********
+给一个类的某个方法绑定一个代理池，代理池根据指定的时间间隔更换代理IP，代理池自动移除无效的代理IP，不影响其他函数
+```
+  
+  Test target = new Test(); 
+  ProxyIPApply  apply=new ProxyIPApply().setClassname(Test.class).setMethodname("Dosomething").setProxypool(proxypool);
+  Test proxy=(Test) apply.Config(target);
+  proxy.Dosomething();
 
-@last
-目前的工作就是构建一个动态、可配置的爬虫和Proxy中基本功能接口的实现。
+```
 
-爬虫的基本功能差不多实现了，还没有进行异常处理和输入过滤。接下来是基本功能接口的实现。
+                    
   
 
-                                                                                                                                    2015.9.17
+                                                                                                                                    
