@@ -5,7 +5,7 @@ FreeProxy是一个给开发者提供免费、高效的代理IP以及相关服务
 
 ###目标与功能
 
-@1
+@A
 第一个基本的功能就是提供给使用者全面、可靠获取代理IP的接口。这些函数定义在Proxy.ProxyFactory类中。包括但不限于：
 
 *获取一个代理IP(默认为国内的、高匿名)
@@ -17,7 +17,7 @@ FreeProxy是一个给开发者提供免费、高效的代理IP以及相关服务
 ...
 
 
-@2
+@B
 第二个功能是提供对代理IP的条件测试。这些函数定义在Action.CheckProxy类中。包括但不限于:
 
 *测试一个(一组)代理IP的匿名度
@@ -26,13 +26,13 @@ FreeProxy是一个给开发者提供免费、高效的代理IP以及相关服务
 *测试一个(一组)代理IP的归属地
 ...
 
-@3
-@1和@2只是FreeProxy提供的基本功能，@3就是在@1和@2的基础上提供更高质量的服务。这些函数暂时定义在Proxy.ProxyOptimize类中。包括但不限于:
+@C
+@A和@B只是FreeProxy提供的基本功能，@3就是在@1和@2的基础上提供更高质量的服务。这些函数暂时定义在Proxy.ProxyOptimize类中。包括但不限于:
 
 *找出访问用户指定的targeturl速度最快的代理IP
 ...
 
-@4
+@D
 有些想法还处于思考阶段。比如：
 
 *定时切换代理，比如一个小时改变一次代理IP
@@ -44,14 +44,14 @@ FreeProxy是一个给开发者提供免费、高效的代理IP以及相关服务
                                
 每个配置文件描述一个数据源，
 
-<ProxySite> 数据所在页面，如果url中包含页数，页号用#代替。一般情况下，不同页的url只有页号不同。
-<IP>        ip在页面的位置
-<Port>      端口在页面的位置
-<Anonymity> 匿名度在页面的位置
-<Procotol>  支持的协议在页面的位置
-<PageEnable> 如果数据源有多个页面，为true
-<PageStart>  当PageEnable=true时，抓取的起始页
-<PageEnd>    当PageEnable=true时,抓取的结束页
+`<`ProxySite> 数据所在页面，如果url中包含页数，页号用#代替。一般情况下，不同页的url只有页号不同。
+`<`IP>        ip在页面的位置
+`<`Port>      端口在页面的位置
+`<`Anonymity> 匿名度在页面的位置
+`<`Procotol>  支持的协议在页面的位置
+`<`PageEnable> 如果数据源有多个页面，为true
+`<`PageStart>  当PageEnable=true时，抓取的起始页
+`<`PageEnd>    当PageEnable=true时,抓取的结束页
 
 每个配置文件描述一个数据源，爬虫可以同时读入多个数据源并爬取数据。
 
